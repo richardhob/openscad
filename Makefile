@@ -23,6 +23,7 @@ stl: $(STL)
 
 copy: $(GCODE)
 	cp $^ $(SDCARD)
+	umount $(SDCARD)
 
 $(OUT)/%.gcode: $(OUT)/%.stl
 	prusa-slicer -g --load ender-config.ini $< -o $@
