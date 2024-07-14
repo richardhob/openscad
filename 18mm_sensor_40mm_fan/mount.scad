@@ -34,4 +34,4 @@ module mount(sensor_diameter, fan_width, screw_diameter, screw_distance, thickne
     }
 }
 
-mount(18, 40, 2.5, 4, 4, 5);
+mount(18, 40, 3, 4, 4, 6);
