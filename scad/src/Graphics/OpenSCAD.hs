@@ -131,14 +131,16 @@ module Graphics.OpenSCAD (
 
 where
 
-import Data.Colour (Colour, AlphaColour, alphaChannel, darken, over, black)
+import Data.Colour (Colour, AlphaColour, alphaChannel, darken, over)
 import Data.Colour.Names as Colours
 import Data.Colour.SRGB (channelRed, channelBlue, channelGreen, toSRGB)
+
 import Data.List (elemIndices, nub, intercalate)
 import qualified Data.List.NonEmpty as NE
-import Data.Semigroup (Semigroup((<>), sconcat), Monoid(mconcat, mempty, mappend))
+
+import Data.Semigroup (sconcat)
+
 import qualified Data.Set as Set
-import System.FilePath (FilePath)
 
 -- A vector in 2 or 3-space. They are used in transformations of
 -- 'Model's of their type.
@@ -634,4 +636,5 @@ instance Vector v => Monoid (Model v) where
 -- | You can use '(#)' to write transformations in a more readable postfix form,
 --   cube 3 # color red # translate (-3, -3, -3)
 infixl 8 #
+(#) :: b -> (b -> c) -> c
 (#) = flip ($)
