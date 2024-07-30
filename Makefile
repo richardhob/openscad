@@ -2,12 +2,12 @@
 OUT:=build
 SDCARD:=/media/rick/B4C2-0F27/
 
-SRC:=mount.scad
+SRC:=mount.scad holder.scad
 STL:=$(addprefix $(OUT)/,$(SRC:.scad=.stl))
 DEPS:=$(STL:.stl=.deps)
 GCODE:=$(STL:.stl=.gcode)
 
-FOLDERS:= 18mm_sensor_40mm_fan
+FOLDERS:= 18mm_sensor_40mm_fan paddle_board_cup_holder
 
 vpath %.scad $(FOLDERS)
 
