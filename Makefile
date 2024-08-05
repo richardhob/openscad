@@ -2,7 +2,7 @@
 OUT:=build
 SDCARD:=/media/rick/B4C2-0F27/
 
-SRC:=mount.scad holder.scad
+SRC:=mount.scad paddle_board_cup_holder.scad
 STL:=$(addprefix $(OUT)/,$(SRC:.scad=.stl))
 DEPS:=$(STL:.stl=.deps)
 GCODE:=$(STL:.stl=.gcode)
