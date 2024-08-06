@@ -1,13 +1,19 @@
 
+// Red Bull Can
 LITTLE_CAN_DIAMETER = 53; // mm
-BIG_CAN_DIAMETER = 66; // mm
-BIG_CAN_HEIGHT = 66; // mm
+LITTLE_CAN_HEIGHT = 135;  // mm
 
-diameter = BIG_CAN_DIAMETER + 4; // mm
-second_diameter = LITTLE_CAN_DIAMETER + 3; // mm
+// Coke Can 
+BIG_CAN_DIAMETER = 66; // mm
+BIG_CAN_HEIGHT = 125;  // mm
+
+CUP_HOLDER_HEIGHT = 44; // mm
+
+diameter = BIG_CAN_DIAMETER + 1; // mm
+second_diameter = LITTLE_CAN_DIAMETER + 1; // mm
 wall_width = 5; // mm
 rope_diameter= 6; // mm
-height = ((2/3)* BIG_CAN_HEIGHT) + 2 * wall_width; // mm
+height = CUP_HOLDER_HEIGHT + 2 * wall_width; // mm
 
 module shell(d1, d2, height, wall) {
     cylinder(d1=d1, d2=d2, h=wall, $fn=100);
