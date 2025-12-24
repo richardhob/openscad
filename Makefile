@@ -3,12 +3,15 @@ OUT:=build
 SDCARD:=/media/rick/B4C2-0F27/
 
 # SRC:=mount.scad paddle_board_cup_holder.scad bottom_v1_0.scad
-SRC:=bottom_v1_0.scad lid_v1_0.scad
+# SRC:=bottom_v1_0.scad lid_v1_0.scad
+SRC:=one_hole.scad one_hole2.scad
+
 STL:=$(addprefix $(OUT)/,$(SRC:.scad=.stl))
 DEPS:=$(STL:.stl=.deps)
 GCODE:=$(STL:.stl=.gcode)
 
-FOLDERS:= 18mm_sensor_40mm_fan paddle_board_cup_holder zynq_box
+# FOLDERS:= 18mm_sensor_40mm_fan paddle_board_cup_holder zynq_box
+FOLDERS:= knife_holder
 
 vpath %.scad $(FOLDERS)
 
