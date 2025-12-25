@@ -40,3 +40,6 @@ $(OUT)/%.stl: %.scad
 
 clean:
 	rm -rf $(OUT)
+
+libs/BOSL2:
+	git clone https://github.com/BelfrySCAD/BOSL2.git

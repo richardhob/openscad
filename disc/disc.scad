@@ -1,40 +1,35 @@
 
+// Guess width: 12 cm
+// Guess height: 3 cm
+
+include <quad2.scad>
+include <BOSL2/std.scad>
+
+a = [0, 3];
+b = [12, 2];
+c = [15, 1.5];
+
+d = [15, 1.5];
+e = [13, 0.75];
+f = [12, 0];
+
+g = [12, 1.5];
+h = [10, 1.75];
+i = [0, 2.5];
+
 module profile() {
-    assert(width > inner_width);
-    assert(height > inner_height);
-
-    width = 10;
-    inner_width = 8;
-
-    between_width = inner_width + (abs(width - inner_width) / 2);
-
-    height = 3;
-    inner_height = 1;
-
-    between_height = abs(height - inner_height) / 2;
-
-    points = [
-        // [x, y]
-        [0, inner_height], // a
-        [inner_width, inner_height], // b
-        [between_width, 0], // c
-        [width, inner_height], // d
-        [between_width, height], // e
-        [0, height], // f
-    ];
+    points = concat(
+        quadratic_path(a, b, c, 50),
+        quadratic_path(d, e, f, 50),
+        quadratic_path(g, h, i)
+    );
 
     polygon(points);
 }
 
-// from: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/List_Comprehensions
-// NOTE: There is also concat I think?
-function flatten(l) = [for (a = l) for (b = a) b];
-
-function inner_curve(start, mid, end, n=100) = [ for(i=0;i<n;i++) ];
-function outer_curve(start, end) = 
-
 module disc() {
-    rotate_extrude(angle=360, convexity=10, $fn=20) profile();
+    rotate_extrude(angle=360, convexity=10, $fn=50) profile();
 }
 
+// profile();
 disc();
