@@ -100,27 +100,32 @@ module trapezoid2(base_width, base_length, top_width, top_length, height) {
     polyhedron(points=trapezoid_points, faces=trapezoid_faces);
 }
 
-module connector(cutout_width, cutout_offset, cutout_depth=1) {
-    cube([BASE_WIDTH, BASE_HEIGHT, BASE_DEPTH]);
+module connector(cutout_width, cutout_offset, cutout_depth=1, tabs=true,
+                 base=true, side_b_base=SIDE_B_BASE) {
+    depth = 0;
+    if (base == true) {
+        depth = BASE_DEPTH;
+        cube([BASE_WIDTH, BASE_HEIGHT, BASE_DEPTH]);
+    }
 
     move_x = abs(SIDE_A_BASE - BASE_WIDTH) / 2;
-    move_y = abs(SIDE_B_BASE - BASE_HEIGHT) / 2;
+    move_y = abs(side_b_base - BASE_HEIGHT) / 2;
 
-
-    translate([move_x, move_y, BASE_DEPTH]) {
+    translate([move_x, move_y, depth]) {
         difference() {
-            // Main connector
             union() {
-                trapezoid2(SIDE_A_BASE, SIDE_B_BASE, SIDE_A_TOP, SIDE_B_TOP, SIDE_A_HEIGHT);
-                translate([0, SIDE_B_BASE-TAB_WIDTH/2, SIDE_A_HEIGHT-TAB_DEPTH])
-                    rotate([0, 0, -90])
-                        trapezoid(SIDE_A_BASE, SIDE_A_TOP, TAB_WIDTH, TAB_DEPTH);
+                trapezoid2(SIDE_A_BASE, side_b_base, SIDE_A_TOP, SIDE_B_TOP, SIDE_A_HEIGHT);
+                if (true == tabs) {
+                    translate([0, TAB_WIDTH + (side_b_base - TAB_WIDTH)/2, SIDE_A_HEIGHT - TAB_DEPTH])
+                        rotate([0, 0, -90])
+                            trapezoid(SIDE_A_BASE, SIDE_A_TOP, TAB_WIDTH, TAB_DEPTH);
+                }
             }
 
             cutout_x = (SIDE_A_BASE - SIDE_A_TOP) / 2;
-            cutout_y = SIDE_B_TOP - cutout_depth + (SIDE_B_BASE - SIDE_B_TOP) / 2;
+            cutout_y = SIDE_B_TOP - cutout_depth + (side_b_base - SIDE_B_TOP) / 2;
             
-            translate([cutout_x + cutout_offset, cutout_y, 0]) {
+            translate([cutout_x + cutout_offset, cutout_y, -1]) {
                 cube([cutout_width, 10, SIDE_A_HEIGHT + 2]);
             }
         }
@@ -128,4 +133,4 @@ module connector(cutout_width, cutout_offset, cutout_depth=1) {
 
 }
 
-connector(10, 1);
+// connector(10, 1, tabs=true, base=true);
